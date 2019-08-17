@@ -1,0 +1,30 @@
+<div class="align-right">
+    <button type="button" class="btn btn-primary" (click)="addEntry()">Add Row</button>
+</div>
+
+<div *ngFor="let timeLog of timeLogEntries; let i = index">
+    <div class="card card-margin">
+        <div class="card-body row">
+            <div class="col-md-4">
+                <select class="form-control" id="project" [(ngModel)]="timeLog.project_id">
+                    <option [value]=null>Select Project</option>
+                    <option *ngFor="let project of projectList" [value]="project.id">{{project.name}}</option>
+                </select>
+            </div>
+            <div class="col-md-3">
+                <input type="number" class="form-control" id="hours" max="24" placeholder="Enter Hours" [(ngModel)]="timeLog.hours">
+            </div>
+            <div class="col-md-4">
+                <textarea [(ngModel)]="timeLog.description" id="description" row="1" placeholder="Enter Description" class="form-control"></textarea>
+            </div>
+            <div class="col-md-1">
+                <span (click)="removeEntry(i)" class="close-icon">&times;</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="align-right">
+    <button type="button" class="btn btn-primary button-margin" (click)="saveEntries()" [disabled]="timeLogEntries.length==0">Save Entries</button>
+    <button type="button" class="btn btn-primary button-margin" (click)="redirectToTimesheet()">Cancel</button>
+</div>
